@@ -30,7 +30,7 @@ void main() {
     }
     diffuse = light_color * N_dot_L;
     vec3 V_vector = normalize(camera_position - vertex_position);
-    vec3 reflection = normalize(reflect(L_vector, vertex_normal)); //L might need to be negative
+    vec3 reflection = normalize(reflect(-L_vector, vertex_normal)); //L might need to be negative
     float R_dot_V = dot(reflection, V_vector);
     if(R_dot_V < 0.0)
     {
