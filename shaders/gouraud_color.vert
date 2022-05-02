@@ -37,4 +37,5 @@ void main() {
         R_dot_V = 0.0;
     }
     specular = light_color * pow(R_dot_V, material_shininess);
+
 }

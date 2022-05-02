@@ -130,6 +130,7 @@ class GlApp {
         // TODO: set texture parameters and upload a temporary 1px white RGBA array [255,255,255,255]
         // 
 
+
         // download the actual image
         let image = new Image();
         image.crossOrigin = 'anonymous';
@@ -159,7 +160,13 @@ class GlApp {
             //
             // TODO: properly select shader here
             //
-            let selected_shader = 'emissive';
+            let selected_shader;
+            if(this.algorithm == 'gouraud') {
+                selected_shader = 'gouraud_color';
+            } else {
+                selected_shader = 'phong_color';
+            }
+            
             this.gl.useProgram(this.shader[selected_shader].program);
 
             // transform model to proper position, size, and orientation
