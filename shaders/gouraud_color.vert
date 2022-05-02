@@ -21,16 +21,17 @@ out vec3 specular;
 void main() {
     gl_Position = projection_matrix * view_matrix * model_matrix * vec4(vertex_position, 1.0);
     ambient = light_ambient;
-    normalize(vertex_normal);
-    vec3 L_vector = normalize(light_position - vertex_position);
-    float N_dot_L = dot(vertex_normal, L_vector);
+    vec3 normal = normalize(vertex_normal * transpose(inverse(mat3(model_matrix))));
+    vec3 position = vec3(model_matrix * vec4(vertex_position,1.0));
+    vec3 L_vector = normalize(light_position - position);
+    float N_dot_L = dot(normal, L_vector);
     if(N_dot_L < 0.0)
     {
         N_dot_L = 0.0;
     }
     diffuse = light_color * N_dot_L;
-    vec3 V_vector = normalize(camera_position - vertex_position);
-    vec3 reflection = normalize(reflect(-L_vector, vertex_normal)); //L might need to be negative
+    vec3 V_vector = normalize(camera_position - position);
+    vec3 reflection = normalize(reflect(-L_vector, normal)); //L might need to be negative
     float R_dot_V = dot(reflection, V_vector);
     if(R_dot_V < 0.0)
     {
