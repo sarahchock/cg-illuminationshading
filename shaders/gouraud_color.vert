@@ -21,7 +21,7 @@ out vec3 specular;
 void main() {
     gl_Position = projection_matrix * view_matrix * model_matrix * vec4(vertex_position, 1.0);
     ambient = light_ambient;
-    vec3 normal = normalize(vertex_normal * transpose(inverse(mat3(model_matrix))));
+    vec3 normal = normalize(transpose(inverse(mat3(model_matrix))) * vertex_normal);
     vec3 position = vec3(model_matrix * vec4(vertex_position,1.0));
     vec3 L_vector = normalize(light_position - position);
     float N_dot_L = dot(normal, L_vector);
