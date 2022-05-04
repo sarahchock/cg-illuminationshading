@@ -181,12 +181,31 @@ class GlApp {
             this.gl.uniform3fv(this.shader[selected_shader].uniforms.material_specular, this.scene.models[i].material.specular);
             this.gl.uniform1f(this.shader[selected_shader].uniforms.material_shininess, this.scene.models[i].material.shininess);
             this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_ambient, this.scene.light.ambient);
-            this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_position, this.scene.light.point_lights[0].position);
-            this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_color, this.scene.light.point_lights[0].color);
+            
             this.gl.uniform3fv(this.shader[selected_shader].uniforms.camera_position, this.scene.camera.position);
             this.gl.uniformMatrix4fv(this.shader[selected_shader].uniforms.projection_matrix, false, this.projection_matrix);
             this.gl.uniformMatrix4fv(this.shader[selected_shader].uniforms.view_matrix, false, this.view_matrix);
             this.gl.uniformMatrix4fv(this.shader[selected_shader].uniforms.model_matrix, false, this.model_matrix);
+            
+            //create array of size 30 with all light positions first
+            let light_positions = [];
+            let light_colors = [];
+            for(let r = 0; r < 10; r++)
+            {
+                if(r < this.scene.light.point_lights.length)
+                {
+                    light_positions.push(this.scene.light.point_lights[r].position[0], this.scene.light.point_lights[r].position[1], this.scene.light.point_lights[r].position[2]);
+                    light_colors.push(this.scene.light.point_lights[r].color[0], this.scene.light.point_lights[r].color[1], this.scene.light.point_lights[r].color[2]);
+                }
+                else
+                {
+                    light_positions.push(null,null,null);
+                    light_colors.push(null,null,null);
+                }
+            }
+            // this is not properly assigning here, waiting on email response. It sends all values of 0.0 or undefined I believe
+            this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_position, light_positions);
+            this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_color, light_colors);
             
             //
             // TODO: bind proper texture and set uniform (if shader is a textured one)
@@ -198,7 +217,7 @@ class GlApp {
         }
 
         // draw all light sources
-        for (let i = 0; i < this.scene.light.point_lights.length; i ++) {
+        for (let i = 0; i < this.scene.light.point_lights.length; i++) {
             this.gl.useProgram(this.shader['emissive'].program);
 
             glMatrix.mat4.identity(this.model_matrix);
