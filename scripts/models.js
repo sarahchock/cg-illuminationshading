@@ -395,5 +395,232 @@ function createSphereVertexArray(gl, position_attrib, normal_attrib, texcoord_at
 //         - minimum of 16 vertices
 //
 function createCustomVertexArray(gl, position_attrib, normal_attrib, texcoord_attrib) {
-    return null;
+      let vertex_array = gl.createVertexArray();
+      gl.bindVertexArray(vertex_array);
+  
+      
+      let vertex_position_buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertex_position_buffer);
+      let vertices = [
+          // Front face
+        -0.5, -0.5,  0.5,
+         0.5, -0.5,  0.5,
+         0.5,  0.5,  0.5,
+        -0.5,  0.5,  0.5,
+
+        // Back face
+        0.5, -0.5, -1.0,
+       -0.5, -0.5, -1.0,
+       -0.5,  0.5, -1.0,
+        0.5,  0.5, -1.0,
+
+        // Top face
+       -0.5,  0.5,  0.5,
+        0.5,  0.5,  0.5,
+        0.5,  0.5, -0.5,
+       -0.5,  0.5, -0.5,
+
+        // Bottom face
+        0.5, -0.5,  0.5,
+       -0.5, -0.5,  0.5,
+       -0.5, -0.5, -0.5,
+        0.5, -0.5, -0.5,
+
+        // Right face
+        0.5, -0.5,  0.5,
+        0.5, -0.5, -1.0,
+        0.5,  0.5, -1.0,
+        0.5,  0.5,  0.5,
+
+        // Left face
+       -0.5, -0.5, -1.0,
+       -0.5, -0.5,  0.5,
+       -0.5,  0.5,  0.5,
+       -0.5,  0.5, -1.0,
+
+       // Left roof face
+       -0.5,  0.5, -1.0,
+       -0.5,  0.5,  0.5,
+        0.0,  1.0,  0.5,
+        0.0,  1.0, -1.0,
+
+        // Right roof face
+        0.5,  0.5, -1.0,
+        0.5,  0.5,  0.5,
+        0.0,  1.0,  0.5,
+        0.0,  1.0, -1.0,
+
+        // Front roof face
+        -0.5, 0.5,  0.5,
+         0.5, 0.5,  0.5,
+         0.0, 1.0,  0.5,
+
+        // Back roof face
+       -0.5, 0.5, -1.0,
+        0.5, 0.5, -1.0,
+        0.0, 1.0, -1.0
+    ];
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(position_attrib);
+      gl.vertexAttribPointer(position_attrib, 3, gl.FLOAT, false, 0, 0);
+  
+  
+      let vertex_normal_buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertex_normal_buffer);
+      let normals = [
+          // Front
+        0.0,  0.0,  1.0,
+        0.0,  0.0,  1.0,
+        0.0,  0.0,  1.0,
+        0.0,  0.0,  1.0,
+
+        // Back
+        0.0,  0.0, -1.0,
+        0.0,  0.0, -1.0,
+        0.0,  0.0, -1.0,
+        0.0,  0.0, -1.0,
+
+        // Top
+        0.0,  1.0,  0.0,
+        0.0,  1.0,  0.0,
+        0.0,  1.0,  0.0,
+        0.0,  1.0,  0.0,
+
+        // Bottom
+        0.0, -1.0,  0.0,
+        0.0, -1.0,  0.0,
+        0.0, -1.0,  0.0,
+        0.0, -1.0,  0.0,
+
+        // Right
+        1.0,  0.0,  0.0,
+        1.0,  0.0,  0.0,
+        1.0,  0.0,  0.0,
+        1.0,  0.0,  0.0,
+
+        // Left
+        -1.0,  0.0,  0.0,
+        -1.0,  0.0,  0.0,
+        -1.0,  0.0,  0.0,
+        -1.0,  0.0,  0.0,
+
+        // Left Roof
+        -0.5,  0.5,  0.0,
+        -0.5,  0.5,  0.0,
+        -0.5,  0.5,  0.0,
+        -0.5,  0.5,  0.0,
+
+        // Right Roof
+         0.5,  0.5,  0.0,
+         0.5,  0.5,  0.0,
+         0.5,  0.5,  0.0,
+         0.5,  0.5,  0.0,
+
+         // Front Roof
+        0.0,  0.0,  1.0,
+        0.0,  0.0,  1.0,
+        0.0,  0.0,  1.0,
+        0.0,  0.0,  1.0,
+
+        // Back Roof
+        0.0,  0.0, -1.0,
+        0.0,  0.0, -1.0,
+        0.0,  0.0, -1.0,
+        0.0,  0.0, -1.0,
+      ];
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normals), gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(normal_attrib);
+      gl.vertexAttribPointer(normal_attrib, 3, gl.FLOAT, false, 0, 0);
+  
+  
+      let vertex_texcoord_buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertex_texcoord_buffer);
+      let texcoords = [
+        // Front
+        0.0,  0.0,
+        1.0,  0.0,
+        1.0,  1.0,
+        0.0,  1.0,
+
+        // Back
+        0.0,  0.0,
+        1.0,  0.0,
+        1.0,  1.0,
+        0.0,  1.0,
+
+        // Top
+        0.0,  0.0,
+        1.0,  0.0,
+        1.0,  1.0,
+        0.0,  1.0,
+
+        // Bottom
+        0.0,  0.0,
+        1.0,  0.0,
+        1.0,  1.0,
+        0.0,  1.0,
+
+        // Right
+        0.0,  0.0,
+        1.0,  0.0,
+        1.0,  1.0,
+        0.0,  1.0,
+
+        // Left
+        0.0,  0.0,
+        1.0,  0.0,
+        1.0,  1.0,
+        0.0,  1.0,
+
+        // Left Roof
+        0.0,  0.0,
+        1.0,  0.0,
+        1.0,  1.0,
+        0.0,  1.0,
+
+        // Right Roof
+        0.0,  0.0,
+        1.0,  0.0,
+        1.0,  1.0,
+        0.0,  1.0,
+
+        // Front Roof
+        0.0,  0.0,
+        1.0,  0.0,
+        1.0,  1.0,
+        0.0,  1.0,
+
+        // Back Roof
+        0.0,  0.0,
+        1.0,  0.0,
+        1.0,  1.0,
+        0.0,  1.0
+      ];
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(texcoords), gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(texcoord_attrib);
+      gl.vertexAttribPointer(texcoord_attrib, 2, gl.FLOAT, false, 0, 0);
+  
+      
+      let vertex_index_buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, vertex_index_buffer);
+
+      let indices = [
+        0,  1,  2,      0,  2,  3,   // Front
+        4,  5,  6,      4,  6,  7,   // Back
+        8,  9, 10,      8, 10, 11,   // Top
+       12, 13, 14,     12, 14, 15,   // Bottom
+       16, 17, 18,     16, 18, 19,   // Right
+       20, 21, 22,     20, 22, 23,   // Left
+       24, 25, 26,     24, 26, 27,   // Left Roof
+       28, 29, 30,     28, 30, 31,   // Right Roof
+       32, 33, 34,                   // Front Roof 
+       35, 36, 37                    // Back Roof
+      ];
+      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+  
+  
+      gl.bindVertexArray(null);
+      vertex_array.face_index_count = indices.length;
+
+      return vertex_array;
 }
