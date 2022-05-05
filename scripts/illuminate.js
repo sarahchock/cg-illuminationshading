@@ -166,7 +166,7 @@ class GlApp {
             } else {
                 selected_shader = 'phong_color';
             }
-            console.log(this.shader[selected_shader].uniforms);
+            
             this.gl.useProgram(this.shader[selected_shader].program);
 
             // transform model to proper position, size, and orientation
