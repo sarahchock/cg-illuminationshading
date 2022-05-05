@@ -418,12 +418,6 @@ function createCustomVertexArray(gl, position_attrib, normal_attrib, texcoord_at
        -0.5,  0.5, -1.0,
         0.5,  0.5, -1.0,
 
-        // Top face
-       -0.5,  0.5,  0.5,
-        0.5,  0.5,  0.5,
-        0.5,  0.5, -0.5,
-       -0.5,  0.5, -0.5,
-
         // Bottom face
         0.5, -0.5,  0.5,
        -0.5, -0.5,  0.5,
@@ -488,12 +482,6 @@ function createCustomVertexArray(gl, position_attrib, normal_attrib, texcoord_at
         0.0,  0.0, -1.0,
         0.0,  0.0, -1.0,
 
-        // Top
-        0.0,  1.0,  0.0,
-        0.0,  1.0,  0.0,
-        0.0,  1.0,  0.0,
-        0.0,  1.0,  0.0,
-
         // Bottom
         0.0, -1.0,  0.0,
         0.0, -1.0,  0.0,
@@ -556,12 +544,6 @@ function createCustomVertexArray(gl, position_attrib, normal_attrib, texcoord_at
         1.0,  1.0,
         0.0,  1.0,
 
-        // Top
-        0.0,  0.0,
-        1.0,  0.0,
-        1.0,  1.0,
-        0.0,  1.0,
-
         // Bottom
         0.0,  0.0,
         1.0,  0.0,
@@ -615,14 +597,14 @@ function createCustomVertexArray(gl, position_attrib, normal_attrib, texcoord_at
       let indices = [
         0,  1,  2,      0,  2,  7,       2,  6,  7,       2,  3,  6,      3,  5,  6,       3,  4,  5,// Front   
         8,  9, 10,      8, 10, 11,   // Back
-       12, 13, 14,     12, 14, 15,   // Top
-       16, 17, 18,     16, 18, 19,   // Bottom
-       20, 21, 22,     20, 22, 23,   // Right
-       24, 25, 26,     24, 26, 27,   // Left
-       28, 29, 30,     28, 30, 31,   // Left Roof
-       32, 33, 34,     32, 34, 35,   // Right Roof 
-       36, 37, 38,                   // Front Roof
-       39, 40, 41                    // Back Roof
+       12, 13, 14,     12, 14, 15,   // Bottom
+       16, 17, 18,     16, 18, 19,   // Right
+       20, 21, 22,     20, 22, 23,   // Left
+       24, 25, 26,     24, 26, 27,   // Left Roof
+       28, 29, 30,     28, 30, 31,   // Right Roof 
+       32, 33, 34,                   // Front Roof
+       37, 36, 35                    // Back Roof
+                          
       ];
       gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
   

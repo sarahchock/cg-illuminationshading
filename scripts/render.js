@@ -27,7 +27,7 @@ function init() {
                         rotate_z: 0
                     },
                     {
-                        type: 'sphere',
+                        type: 'custom',
                         shader: 'color',
                         material: {
                             color: vec3.fromValues(0.1, 0.4, 0.9),  // red, green, blue
@@ -39,7 +39,7 @@ function init() {
                         rotate_x: 0,
                         rotate_y: 0,
                         rotate_z: 0
-                    },
+                    }/*,
                     {
                         type: 'custom',
                         shader: 'color',
@@ -53,7 +53,7 @@ function init() {
                         rotate_x: 0,
                         rotate_y: 0,
                         rotate_z: 0
-                    }
+                    }*/
                 ],
                 light: {
                     ambient: glMatrix.vec3.fromValues(0.2, 0.2, 0.2),  // red, green, blue
@@ -61,11 +61,11 @@ function init() {
                         {
                             position: vec3.fromValues(1.5, 3.0, -4.5),  // x, y, z
                             color: vec3.fromValues(1.0, 1.0, 0.8)  // red, green, blue
-                        },
+                        }/*,
                         {
                             position: vec3.fromValues(-2.0, 3.0, -4.0),  // x, y, z
                             color: vec3.fromValues(1.0, 1.0, 1.0)  // red, green, blue
-                        }
+                        }*/
                     ]
                 }
             }
