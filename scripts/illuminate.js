@@ -166,7 +166,7 @@ class GlApp {
             } else {
                 selected_shader = 'phong_color';
             }
-            
+            console.log(this.shader[selected_shader].uniforms);
             this.gl.useProgram(this.shader[selected_shader].program);
 
             // transform model to proper position, size, and orientation
@@ -188,25 +188,33 @@ class GlApp {
             this.gl.uniformMatrix4fv(this.shader[selected_shader].uniforms.model_matrix, false, this.model_matrix);
             
             //create array of size 30 with all light positions first
-            let light_positions = [];
-            let light_colors = [];
+            let light_positions = new Float32Array(30);
+            let light_colors = new Float32Array(30);
             for(let r = 0; r < 10; r++)
             {
                 if(r < this.scene.light.point_lights.length)
                 {
-                    light_positions.push(this.scene.light.point_lights[r].position[0], this.scene.light.point_lights[r].position[1], this.scene.light.point_lights[r].position[2]);
-                    light_colors.push(this.scene.light.point_lights[r].color[0], this.scene.light.point_lights[r].color[1], this.scene.light.point_lights[r].color[2]);
+                    // can these be done more quickly?
+                    light_positions[3*r] = this.scene.light.point_lights[r].position[0];
+                    light_positions[3*r + 1] = this.scene.light.point_lights[r].position[1];
+                    light_positions[3*r + 2] = this.scene.light.point_lights[r].position[2];
+                    light_colors[3*r] = this.scene.light.point_lights[r].color[0];
+                    light_colors[3*r + 1] = this.scene.light.point_lights[r].color[1];
+                    light_colors[3*r + 2] = this.scene.light.point_lights[r].color[2];
                 }
                 else
                 {
-                    light_positions.push(null,null,null);
-                    light_colors.push(null,null,null);
+                    light_positions[3*r] = 0.0;
+                    light_positions[3*r + 1] = 0.0;
+                    light_positions[3*r + 2] = 0.0;
+                    light_colors[3*r] = 0.0;
+                    light_colors[3*r + 1] = 0.0;
+                    light_colors[3*r + 2] = 0.0;
                 }
             }
-            // this is not properly assigning here, waiting on email response. It sends all values of 0.0 or undefined I believe
-            this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_position, light_positions);
-            this.gl.uniform3fv(this.shader[selected_shader].uniforms.light_color, light_colors);
             
+            this.gl.uniform3fv(this.shader[selected_shader].uniforms['light_position[0]'], light_positions);
+            this.gl.uniform3fv(this.shader[selected_shader].uniforms['light_color[0]'], light_colors);
             //
             // TODO: bind proper texture and set uniform (if shader is a textured one)
             //

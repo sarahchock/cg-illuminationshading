@@ -19,14 +19,10 @@ void main() {
     vec3 ambient = light_ambient * material_color;
     vec3 specular;
     vec3 diffuse;
-    // temps will eventually be removed and only light_position[i] or color will need to be referenced
-    vec3 light_positiontemp[10];
-    vec3 light_colortemp[10];
-    light_positiontemp[0] = vec3(1.5, 3.0, -4.5);
-    light_colortemp[0] = vec3(1.0, 1.0, .8);
+    
     for(int i = 0; i < 10; i++)
     {
-        vec3 light_vector = normalize(light_positiontemp[i] - frag_pos);
+        vec3 light_vector = normalize(light_position[i] - frag_pos);
         float diffdot = dot(frag_normal, light_vector);
         if(diffdot < 0.0) 
         {
@@ -41,8 +37,8 @@ void main() {
             specdot = 0.0;
         }
 
-        diffuse += light_colortemp[i] * material_color * diffdot;
-        specular += light_colortemp[i] * material_specular * pow(specdot, material_shininess);
+        diffuse += light_color[i] * material_color * diffdot;
+        specular += light_color[i] * material_specular * pow(specdot, material_shininess);
     }
     FragColor = vec4(ambient + diffuse + specular, 1.0);
 }
