@@ -161,10 +161,19 @@ class GlApp {
             // TODO: properly select shader here
             //
             let selected_shader;
-            if(this.algorithm == 'gouraud') {
-                selected_shader = 'gouraud_color';
-            } else {
-                selected_shader = 'phong_color';
+            if(this.scene.models[i].shader == 'color') {
+                if(this.algorithm == 'gouraud') {
+                    selected_shader = 'gouraud_color';
+                } else {
+                    selected_shader = 'phong_color';
+                }
+            }
+            else {
+                if(this.algorithm == 'gouraud') {
+                    selected_shader = 'gouraud_texture';
+                } else {
+                    selected_shader = 'phong_texture';
+                }
             }
             
             this.gl.useProgram(this.shader[selected_shader].program);
@@ -218,6 +227,17 @@ class GlApp {
             //
             // TODO: bind proper texture and set uniform (if shader is a textured one)
             //
+            // also what is a sampler
+            // why do we need to bind textures now but we didn't bind like other things
+            if(this.scene.models[i].shader == 'texture')
+            {
+                let tex_id = this.initializeTexture(this.scene.models[i].texture.url)
+                this.gl.activeTexture(this.gl.TEXTURE0);
+                this.gl.bindTexture(this.gl.TEXTURE_2D, tex_id);
+                this.gl.uniform1i(this.shader[selected_shader].image, 0);
+                this.gl.uniform2iv(this.shader[selected_shader].texture_scale, [this.scene.models[i].texture.scale[0], this.scene.models[i].texture.scale[1]]);
+                this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+            }
 
             this.gl.bindVertexArray(this.vertex_array[this.scene.models[i].type]);
             this.gl.drawElements(this.gl.TRIANGLES, this.vertex_array[this.scene.models[i].type].face_index_count, this.gl.UNSIGNED_SHORT, 0);

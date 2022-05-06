@@ -39,21 +39,22 @@ function init() {
                         rotate_x: 0,
                         rotate_y: 0,
                         rotate_z: 0
-                    }/*,
+                    },
                     {
-                        type: 'custom',
-                        shader: 'color',
+                        type: 'sphere',
+                        shader: "texture",
                         material: {
-                            color: vec3.fromValues(0.4, 0.9, 0.0),  // red, green, blue
-                            specular: vec3.fromValues(1.0, 1.0, 1.0),  // red, green, blue
+                            color: [1.0, 1.0, 1.0],
+                            specular: [1.0, 1.0, 1.0],
                             shininess: 32
                         },
-                        center: vec3.fromValues(-1.5, .6, -6.0), // x, y, z
-                        size: vec3.fromValues(2.0, 1.0, 2.0),  // width, height, depth
-                        rotate_x: 0,
-                        rotate_y: 0,
-                        rotate_z: 0
-                    }*/
+                        texture: {
+                            url: "images/World_Map.jpg",
+                            scale: [1, 1]
+                        },
+                        center: [0.0, 1.0, -3.0],
+                        size: [2.0, 2.0, 2.0]
+                    }
                 ],
                 light: {
                     ambient: glMatrix.vec3.fromValues(0.2, 0.2, 0.2),  // red, green, blue
