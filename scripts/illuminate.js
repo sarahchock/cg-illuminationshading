@@ -227,8 +227,6 @@ class GlApp {
             //
             // TODO: bind proper texture and set uniform (if shader is a textured one)
             //
-            // also what is a sampler
-            // why do we need to bind textures now but we didn't bind like other things
             if(this.scene.models[i].shader == 'texture')
             {
                 let tex_id = this.initializeTexture(this.scene.models[i].texture.url)
