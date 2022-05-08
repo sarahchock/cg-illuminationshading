@@ -42,7 +42,7 @@ function init() {
                     },*/
                     {
                         type: 'sphere',
-                        shader: 'color',
+                        shader: 'texture',
                         material: {
                             color: vec3.fromValues(1.0, 1.0, 1.0),
                             specular: vec3.fromValues(1.0, 1.0, 1.0),
@@ -50,7 +50,8 @@ function init() {
                         },
                         texture: {
                             url: "images/World_Map.jpg",
-                            scale: vec2.fromValues(1, 1)
+                            scale: vec2.fromValues(1, 1),
+                            id: null
                         },
                         center: vec3.fromValues(0.5, 1.0, -6.0),
                         size: vec3.fromValues(2.0, 2.0, 2.0),
