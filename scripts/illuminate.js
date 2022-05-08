@@ -229,12 +229,32 @@ class GlApp {
             //
             if(this.scene.models[i].shader == 'texture')
             {
-                let tex_id = this.initializeTexture(this.scene.models[i].texture.url)
-                this.gl.activeTexture(this.gl.TEXTURE0);
-                this.gl.bindTexture(this.gl.TEXTURE_2D, tex_id);
-                this.gl.uniform1i(this.shader[selected_shader].image, 0);
-                this.gl.uniform2iv(this.shader[selected_shader].texture_scale, [this.scene.models[i].texture.scale[0], this.scene.models[i].texture.scale[1]]);
-                this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+                this.gl.uniform2fv(this.shader[selected_shader].texture_scale, this.scene.models[i].texture.scale);
+                
+                if(this.scene.models[i].type == 'plane')
+                {
+                    this.gl.activeTexture(this.gl.TEXTURE0);
+                    this.gl.bindTexture(this.gl.TEXTURE_2D, this.scene.models[i].texture.url);
+                    this.gl.uniform1i(this.shader[selected_shader].image, 0);
+                }
+                else if (this.scene.models[i].type == 'sphere')
+                {
+                    this.gl.activeTexture(this.gl.TEXTURE1);
+                    this.gl.bindTexture(this.gl.TEXTURE_2D, this.scene.models[i].texture.url);
+                    this.gl.uniform1i(this.shader[selected_shader].image, 1);
+                }
+                else if (this.scene.models[i].type == 'cube')
+                {
+                    this.gl.activeTexture(this.gl.TEXTURE2);
+                    this.gl.bindTexture(this.gl.TEXTURE_2D, this.scene.models[i].texture.url);
+                    this.gl.uniform1i(this.shader[selected_shader].image, 2);
+                }
+                else if (this.scene.models[i].type == 'custom')
+                {
+                    this.gl.activeTexture(this.gl.TEXTURE3);
+                    this.gl.bindTexture(this.gl.TEXTURE_2D, this.scene.models[i].texture.url);
+                    this.gl.uniform1i(this.shader[selected_shader].image, 3);
+                }
             }
 
             this.gl.bindVertexArray(this.vertex_array[this.scene.models[i].type]);
