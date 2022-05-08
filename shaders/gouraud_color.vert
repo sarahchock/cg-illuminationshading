@@ -27,7 +27,7 @@ void main() {
     
     for(int i = 0; i < 10; i++)
     {
-        vec3 light_vector = normalize(light_position[0] - position);
+        vec3 light_vector = normalize(light_position[i] - position);
         float N_dot_L = dot(normal, light_vector);
         if(N_dot_L < 0.0)
         {
@@ -40,7 +40,7 @@ void main() {
             R_dot_V = 0.0;
         }
 
-        diffuse += light_color[0] * N_dot_L;
-        specular += light_color[0] * pow(R_dot_V, material_shininess);
+        diffuse += light_color[i] * N_dot_L;
+        specular += light_color[i] * pow(R_dot_V, material_shininess);
     }
 }
