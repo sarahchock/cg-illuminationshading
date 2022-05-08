@@ -25,7 +25,7 @@ function init() {
                         rotate_x: 0,
                         rotate_y: 0,
                         rotate_z: 0
-                    },
+                    },/*
                     {
                         type: 'custom',
                         shader: 'color',
@@ -39,21 +39,24 @@ function init() {
                         rotate_x: 0,
                         rotate_y: 0,
                         rotate_z: 0
-                    },
+                    },*/
                     {
                         type: 'sphere',
                         shader: "texture",
                         material: {
-                            color: [1.0, 1.0, 1.0],
-                            specular: [1.0, 1.0, 1.0],
+                            color: vec3.fromValues(1.0, 1.0, 1.0),
+                            specular: vec3.fromValues(1.0, 1.0, 1.0),
                             shininess: 32
                         },
                         texture: {
                             url: "images/World_Map.jpg",
-                            scale: [1, 1]
+                            scale: vec2.fromValues(1, 1)
                         },
-                        center: [0.0, 1.0, -3.0],
-                        size: [2.0, 2.0, 2.0]
+                        center: vec3.fromValues(0.5, 1.0, -6.0),
+                        size: vec3.fromValues(2.0, 2.0, 2.0),
+                        rotate_x: 0,
+                        rotate_y: 0,
+                        rotate_z: 0
                     }
                 ],
                 light: {

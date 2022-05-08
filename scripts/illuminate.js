@@ -129,7 +129,17 @@ class GlApp {
         //
         // TODO: set texture parameters and upload a temporary 1px white RGBA array [255,255,255,255]
         // 
-
+        this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.NEAREST);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE); //S = horizontal
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE); //T = vertical
+        let pixels = [255, 255, 255, 255,
+                      255, 255, 255, 255,
+                      255, 255, 255, 255,
+                      255, 255, 255, 255];
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 2, 2, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array(pixels));
+        this.gl.bindTexture(this.gl.TEXTURE_2D, null);
 
         // download the actual image
         let image = new Image();
@@ -147,6 +157,13 @@ class GlApp {
         //
         // TODO: update image for specified texture
         //
+        this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.NEAREST);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE); //S = horizontal
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE); //T = vertical
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image_element);
+        this.gl.bindTexture(this.gl.TEXTURE_2D, null);
     }
 
     render() {
@@ -175,7 +192,6 @@ class GlApp {
                     selected_shader = 'phong_texture';
                 }
             }
-            
             this.gl.useProgram(this.shader[selected_shader].program);
 
             // transform model to proper position, size, and orientation
