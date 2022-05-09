@@ -17,8 +17,8 @@ out vec4 FragColor;
 
 void main() {
     vec3 ambient = light_ambient * material_color;
-    vec3 specular;
-    vec3 diffuse;
+    vec3 specular = vec3(0.0, 0.0, 0.0);
+    vec3 diffuse = vec3(0.0, 0.0, 0.0);
     
     for(int i = 0; i < 10; i++)
     {
@@ -40,5 +40,16 @@ void main() {
         diffuse += light_color[i] * material_color * diffdot;
         specular += light_color[i] * material_specular * pow(specdot, material_shininess);
     }
-    FragColor = vec4(ambient + diffuse + specular, 1.0);
+    
+    vec3 final = ambient + diffuse + specular;
+    if(final.x > 1.0) {
+        final.x = 1.0;
+    }
+    if(final.y > 1.0) {
+        final.y = 1.0;
+    }
+    if(final.z > 1.0) {
+        final.z = 1.0;
+    } 
+    FragColor = vec4(final, 1.0);
 }
