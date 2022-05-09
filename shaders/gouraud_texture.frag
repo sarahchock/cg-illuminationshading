@@ -16,5 +16,18 @@ out vec4 FragColor;
 void main() {
     // check back later
     vec3 matColor = texture(image, frag_texcoord).rgb * material_color;
-    FragColor = vec4(ambient * matColor + diffuse * matColor + specular * material_specular, 1.0);
+    vec3 final = ambient * matColor + diffuse * matColor + specular * material_specular;
+    if(final.x > 1.0)
+    {
+        final.x = 1.0;
+    }
+    if(final.y > 1.0)
+    {
+        final.y = 1.0;
+    }
+    if(final.z > 1.0)
+    {
+        final.z = 1.0;
+    }
+    FragColor = vec4(final, 1.0);
 }
