@@ -1,0 +1,83 @@
+{
+    "background": [0.53, 0.81, 0.92],
+    "camera": {
+        "position": [0.0, 3.0, 10.0],
+        "target": [0.0, 2.0, 0.0],
+        "up": [0.0, 1.0, 0.0]
+    },
+    "models": [
+        {
+            "type": "plane",
+            "shader": "texture",
+            "material": {
+                "color": [1.0, 1.0, 1.0],
+                "specular": [0.0, 0.0, 0.0],
+                "shininess": 12
+            },
+            "texture": {
+                "url": "images/Grass.jpg",
+                "scale": [10, 10]
+            },
+            "center": [0.0, 0.0, -5.0],
+            "size": [10.0, 1.0, 10.0]
+        },
+        {
+            "type": "custom",
+            "shader": "texture",
+            "material": {
+                "color": [0.67, 0.39, 0.26],
+                "specular": [0.6, 0.6, 0.6],
+                "shininess": 14
+            },
+            "texture": {
+                "url": "images/Brick.jpg",
+                "scale": [1, 1]
+            },
+            "center": [1.0, 1.5, -1.0],
+            "size": [2.0, 2.0, 3.0]
+        },
+        {
+            "type": "cube",
+            "shader": "texture",
+            "material": {
+                "color": [1.0, 1.0, 1.0],
+                "specular": [1.0, 1.0, 1.0],
+                "shininess": 18
+            },
+            "texture": {
+                "url": "images/Glass.jpg",
+                "scale": [1, 1]
+            },
+            "center": [-2.0, 1.25, -2.0],
+            "size": [1.0, 1.5, 1.0]
+        },
+        {
+            "type": "sphere",
+            "shader": "texture",
+            "material": {
+                "color": [0.58, 0.88, 0.88],
+                "specular": [1.0, 1.0, 1.0],
+                "shininess": 32
+            },
+            "texture": {
+                "url": "images/Glass.jpg",
+                "scale": [1, 1]
+            },
+            "center": [-2.0, 2.0, -2.0],
+            "size": [1.0, 1.0, 1.0]
+        }
+    ],
+    "light": {
+        "ambient": [0.15, 0.15, 0.15],
+        "point_lights": [
+            {
+                "position": [0.0, 5.0, 5.0],
+                "color": [1.0, 1.0, 1.0]
+            },
+            {
+                "position": [-2.0, 3.5, -2.5],
+                "color": [1.0, 0.90, 0.73]
+            }
+        ]
+    }
+}
